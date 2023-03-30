@@ -45,6 +45,7 @@ function Body() {
   const { data: pairings } = useQuery(
     ["dishPairingForWine", baseURL, apiKey, wine],
     async () => {
+      console.log(wine);
       return fetch(
         `${baseURL}/food/wine/dishes?wine=${wine}&apiKey=${apiKey}`
       ).then((res) => res.json());
@@ -60,6 +61,8 @@ function Body() {
   const { data: recommendations } = useQuery(
     ["wineRecommendations", baseURL, apiKey, wine, wineForRecommendation],
     async () => {
+      console.log(wine);
+      console.log(wineForRecommendation);
       return fetch(
         `${baseURL}/food/wine/recommendation?wine=${wineForRecommendation || wine
         }&number=2&apiKey=${apiKey}`
@@ -104,7 +107,6 @@ function Body() {
           boxShadow:
             "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px",
         }}
-      className="menuContainer"
       >
         <Link to="/" style={{ textDecoration: "none" }}>
           <Button
@@ -158,10 +160,12 @@ function Body() {
             sx={{ width: 300 }}
             value={searchItem}
             onChange={(event, newValue) => {
+              console.log(newValue);
               setSearchItem(newValue.label);
             }}
             inputValue={searchItem}
             onInputChange={(event, newInputValue) => {
+              console.log(newInputValue);
               setSearchItem(newInputValue);
             }}
             renderInput={(params) => (
